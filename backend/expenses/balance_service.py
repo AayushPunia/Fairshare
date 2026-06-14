@@ -129,8 +129,9 @@ def calculate_group_balances(group_id):
         to_id = settlement.to_user_id
         amount = settlement.amount
 
+        # from_user pays to_user → from_user's debt REDUCES (balance goes up)
         if from_id in balances:
-            balances[from_id]['net_balance'] -= amount
+            balances[from_id]['net_balance'] += amount
             balances[from_id]['settlements_made'].append({
                 'id': settlement.id,
                 'to': settlement.to_user.display_name,
@@ -138,8 +139,9 @@ def calculate_group_balances(group_id):
                 'date': str(settlement.date),
             })
 
+        # to_user receives payment → to_user's credit REDUCES (balance goes down)
         if to_id in balances:
-            balances[to_id]['net_balance'] += amount
+            balances[to_id]['net_balance'] -= amount
             balances[to_id]['settlements_received'].append({
                 'id': settlement.id,
                 'from': settlement.from_user.display_name,
