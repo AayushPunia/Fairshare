@@ -25,7 +25,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.13.5"
       - key: NODE_VERSION
-        value: "18"
+        value: "20"
 
 databases:
   - name: fairshare-db
