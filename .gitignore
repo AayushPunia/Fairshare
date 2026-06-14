@@ -30,3 +30,6 @@ frontend/.env
 # Coverage
 htmlcov/
 .coverage
+
+# Gemini
+.gemini/

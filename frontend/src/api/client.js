@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// In production (monolith deploy), API is on the same domain — use relative paths
+// In development, proxy is configured in vite.config.js so empty string works too
+const API_BASE = import.meta.env.VITE_API_URL || '';
 
 const api = axios.create({
   baseURL: `${API_BASE}/api`,
