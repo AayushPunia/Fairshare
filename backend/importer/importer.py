@@ -52,6 +52,12 @@ def commit_import(session_id, resolved_rows):
             stats['skipped'] += 1
             continue
 
+        # Convert string values back to proper types (raw_data stores as JSON)
+        if isinstance(row.get('amount'), str):
+            row['amount'] = Decimal(row['amount'])
+        if isinstance(row.get('split_with'), str):
+            row['split_with'] = [s.strip() for s in row['split_with'].split(';') if s.strip()]
+
         try:
             if action == 'settlement':
                 _create_settlement(row, group, users_lower, session)
